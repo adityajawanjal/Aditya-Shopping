@@ -9,7 +9,13 @@ const Admin = () => {
         {" "}
         The Admin Panel
       </Heading>
-      <Stack border={"2px solid red"} borderRadius={"3xl"} w={"96"} p={"5"} gap={4}>
+      <Stack
+        border={"2px solid red"}
+        borderRadius={"3xl"}
+        w={"96"}
+        p={"5"}
+        gap={4}
+      >
         <Box
           bgColor={"whatsapp.100"}
           borderRadius={"full"}

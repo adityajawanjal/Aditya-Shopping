@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import Error from "./pages/Error";
 import Cart from "./pages/Cart";
+import SingleProduct from "./pages/SingleProduct";
+import Products from "./pages/Products";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -30,6 +33,13 @@ const App = () => {
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/admin" element={<Admin />} />
                 <Route exact path="/cart" element={<Cart />} />
+                <Route exact path="/profile" element={<Profile />} />
+                <Route exact path="/products" element={<Products />} />
+                <Route
+                  exact
+                  path="/single-product/:id"
+                  element={<SingleProduct />}
+                />
                 <Route path="*" element={<Error />} />
               </Routes>
             </Box>

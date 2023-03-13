@@ -98,27 +98,24 @@ const Navbar = () => {
           </InputGroup>
         </Box>
         <HStack gap={1}>
-          <Image
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-            alt="profile"
-            w={"10"}
-            h={"10"}
-            borderRadius={"3xl"}
-          />
-          <Image
-            src="https://cdn-icons-png.flaticon.com/512/2/2267.png"
-            alt="profile"
-            w={"10"}
-            h={"10"}
-            borderRadius={"full"}
-          />
-          <Image
-            src="https://cdn-icons-png.flaticon.com/512/3081/3081840.png"
-            alt="profile"
-            w={"10"}
-            h={"10"}
-            borderRadius={"full"}
-          />
+          <NavLink to={"/profile"}>
+            <Image
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              alt="profile"
+              w={"10"}
+              h={"10"}
+              borderRadius={"3xl"}
+            />
+          </NavLink>
+          <NavLink to={"/cart"}>
+            <Image
+              src="https://cdn-icons-png.flaticon.com/512/3081/3081840.png"
+              alt="profile"
+              w={"10"}
+              h={"10"}
+              borderRadius={"full"}
+            />
+          </NavLink>
         </HStack>
       </HStack>
       <HStack h={"14"} gap={2} justifyContent={"center"} mb={"8"}>
@@ -127,7 +124,8 @@ const Navbar = () => {
         <NavLink to={"/login"}>Login</NavLink>
         <NavLink to={"/admin"}>Admin</NavLink>
         <NavLink to={"/cart"}>Cart</NavLink>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink to={"/products"}>Products</NavLink>
+        <NavLink to={"/profile"}>Profile</NavLink>
       </HStack>
     </>
   );

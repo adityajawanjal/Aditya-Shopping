@@ -1,6 +1,5 @@
 import React from "react";
 import { Center, Image } from "@chakra-ui/react";
-import ProductCard from "../components/ProductCard";
 
 const Home = () => {
   return (
@@ -15,7 +14,6 @@ const Home = () => {
           h={"400px"}
         />
       </Center>
-      <ProductCard/>
     </>
   );
 };
