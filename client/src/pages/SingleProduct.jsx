@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -6,36 +6,52 @@ import {
   Grid,
   GridItem,
   Heading,
-  HStack,
   Image,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleProduct } from "../redux/slices/productSlice";
+import Loader from "../components/Loader";
+import { add, addToCart, remove } from "../redux/slices/cartSlice";
 
 const SingleProduct = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const { loading, products, error } = useSelector((state) => state.products);
+  const { qty } = useSelector((state) => state.cart);
+  useEffect(() => {
+    dispatch(fetchSingleProduct(params.id));
+  }, [dispatch, params.id]);
+
+  if (error) {
+    return <h1>Error </h1>;
+  }
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <Container maxW={"container.lg"}>
-        <Grid templateColumns={"auto auto"} gap={5}>
+        <Grid templateColumns={{ base: "auto", md: "auto auto" }} gap={5}>
           <GridItem>
             <Image
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s"
-              alt="phooo"
+              src={products.image}
+              alt="{product.name}"
               w={"96"}
               h={"auto"}
+              ml={{ base: "auto", md: "0px" }}
+              mr={{ base: "auto", md: "0px" }}
             />
           </GridItem>
           <GridItem>
             <Stack gap={3}>
-              <Heading>Title of product</Heading>
-              <Text>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
-                ullam enim incidunt molestias, non laboriosam possimus fuga
-                rerum debitis ea necessitatibus tenetur corporis architecto quos
-                consequatur iure voluptatibus sed minus?
-              </Text>
-              <Text fontWeight={"bold"}>In Stocks : 10</Text>
-              <HStack gap={5}>
+              <Heading>{products.name}</Heading>
+              <Text textAlign={"justify"}>{products.description}</Text>
+              <Text>Price : ${products.price}</Text>
+              <Text fontWeight={"bold"}>In Stocks : 7</Text>
+              <Stack gap={5}>
                 <Box>
                   <Button
                     size={"sm"}
@@ -44,11 +60,12 @@ const SingleProduct = () => {
                     p={"1"}
                     mr={"3"}
                     fontSize={"2rem"}
+                    onClick={()=>{dispatch(remove())}}
                   >
                     -
                   </Button>
                   <Button size={"lg"} type={"button"} bgColor={"linkedin.100"}>
-                    Quantity: 2
+                    Quantity: {qty}
                   </Button>
                   <Button
                     size={"sm"}
@@ -57,14 +74,30 @@ const SingleProduct = () => {
                     p={"1"}
                     ml={"3"}
                     fontSize={"2rem"}
+                    onClick={()=>{dispatch(add())}}
                   >
                     +
                   </Button>
                 </Box>
-                <Button size={"lg"} type={"button"} bgColor={"red.100"}>
+                <Button
+                  size={"lg"}
+                  type={"button"}
+                  bgColor={"red.100"}
+                  maxW={"60"}
+                  onClick={()=>{dispatch(addToCart({
+                    id:products.id,
+                    name:products.title,
+                    description:products.description,
+                    price:products.price,
+                    category:products.category,
+                    ratings:products.rating,
+                    image:products.image,
+                    qty:qty
+                  }))}}
+                >
                   Add to Cart
                 </Button>
-              </HStack>
+              </Stack>
             </Stack>
           </GridItem>
         </Grid>

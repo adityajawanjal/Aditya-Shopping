@@ -17,6 +17,8 @@ const Navbar = () => {
         justifyContent={"space-between"}
         p={"3"}
         borderBottom={"1px solid gray"}
+        flexDir={{ base: "column", md: "row" }}
+        gap={{ base: 3, md: 0 }}
       >
         <HStack gap={1}>
           <Box bgColor={"gray.100"}>
@@ -72,7 +74,7 @@ const Navbar = () => {
       </HStack>
       <HStack
         justifyContent={"space-between"}
-        p={"5"}
+        p={{ base: "2", sm: "5" }}
         borderBottom={"1px solid gray"}
       >
         <HStack gap={1} justifyContent={"right"}>
@@ -86,7 +88,7 @@ const Navbar = () => {
               size={"lg"}
               border={"2px solid blue"}
               bgColor={"whiteAlpha.900"}
-              w={"96"}
+              w={{ base: "40", sm: "52", md: "96" }}
             />
             <InputRightElement>
               <Image
@@ -118,7 +120,12 @@ const Navbar = () => {
           </NavLink>
         </HStack>
       </HStack>
-      <HStack h={"14"} gap={2} justifyContent={"center"} mb={"8"}>
+      <HStack
+        h={"14"}
+        gap={{ base: 0, sm: 2 }}
+        justifyContent={"center"}
+        mb={"8"}
+      >
         <NavLink to={"/"}>Home</NavLink>
         <NavLink to={"/register"}>Register</NavLink>
         <NavLink to={"/login"}>Login</NavLink>

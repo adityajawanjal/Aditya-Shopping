@@ -1,58 +1,32 @@
 import React from "react";
 import { Container, HStack } from "@chakra-ui/react";
 import ProductCard from "../components/ProductCard";
+import { useSelector } from "react-redux";
+import Loader from "./../components/Loader";
 
 const Products = () => {
-  const List = [
-    {
-      _id: 1,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s",
-      text: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur",
-      price: 200,
-    },
-    {
-      _id: 2,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s",
-      text: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur",
-      price: 200,
-    },
-    {
-      _id: 3,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s",
-      text: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur",
-      price: 200,
-    },
-    {
-      _id: 4,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s",
-      text: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur",
-      price: 200,
-    },
-    {
-      _id: 5,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s",
-      text: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur",
-      price: 200,
-    },
-    {
-      _id: 6,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s",
-      text: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur",
-      price: 200,
-    },
-    {
-      _id: 7,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ746zHrs66nDKaAV6ctxOinwVd5MVo7h2frT8BdvZ0&s",
-      text: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur",
-      price: 200,
-    },
-  ];
+  const { loading, products, error } = useSelector((state) => state.products);
+
+  if (error) {
+    return <h1>Error occured</h1>;
+  }
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
-      <Container maxW={"container.lg"}>
-        <HStack flexWrap={"wrap"}>
-          {List.map((e) => {
-            return <ProductCard key={e._id} product={e} />;
+      <Container
+        maxW={{
+          base: "container.sm",
+          md: "container.xl",
+          lg: "container.sm",
+          xl: "90vw",
+        }}
+        textAlign={"center"}
+      >
+        <HStack flexWrap={"wrap"} justifyContent={{ base: "center" }}>
+          {products.map((e) => {
+            return <ProductCard key={e.id} product={e} />;
           })}
         </HStack>
       </Container>

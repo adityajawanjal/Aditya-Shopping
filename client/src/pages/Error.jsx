@@ -1,7 +1,11 @@
 import React from "react";
 
 const Error = () => {
-  return <>error page</>;
+  return (
+    <>
+      Error 
+    </>
+  );
 };
 
 export default Error;
